@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Object Prototype</title>
+    <script>
+        //6.1, 6.2
+
+        var empty= {};
+        var point ={x:0, y:0};
+        var point2 ={x:point.x, y:point.y};
+        var book={
+            'main title' :'JavaScript',
+            'sub-title': 'The Definitive Guide',
+            'for' :'all students',
+            author:{
+                firstname:'David',
+                lastname:'Flanagan'
+            }
+        };
+        var author = book.author;
+        var name = author.lastname;
+        var title = book['main title'];
+        console.log(empty);
+        console.log(point);
+        console.log(point2);
+        console.log(point2.hasOwnProperty('x'));
+        console.log(book);
+        console.log(author);
+        console.log(name);
+        console.log(title);
+
+        var o=new Object();
+        var a = new Array();
+        var d= new Date();
+        var r = new RegExp();
+        var o1 = Object.create({x:1, y:2});
+        var o2 = Object.create(point);
+        var o3 = Object.create(null);
+        var o4 = Object.create(Object.prototype);
+
+        console.log(o);
+        console.log(o1);
+        console.log(o2);
+        console.log(o3);
+        console.log(o4);
+        delete book.for;
+        console.log(book.hasOwnProperty('for'));
+        console.log(o2.hasOwnProperty('x'));
+        console.log(o2.hasOwnProperty('toString'));
+        console.log(o2.propertyIsEnumerable('x'));
+        console.log(point2.propertyIsEnumerable('x'));
+        console.log(Object.prototype.propertyIsEnumerable('toString'));
+        console.log(Object.prototype.hasOwnProperty('toString'));
+        console.log(delete book.for);
+
+        console.log(Object.keys(point2));
+        console.log(Object.keys(book));
+        console.log(Object.getOwnPropertyNames(book));
+        console.log(Object.getOwnPropertyDescriptor(book, 'author'));
+        console.log(Object.getOwnPropertyDescriptor(author, 'firstname'));
+        Object.preventExtensions(point);
+        point.x=4;
+
+        console.log(point.x);
+        Object.seal(point);
+        point.x=5;
+        delete point.y;
+        console.log(point.y);
+        console.log(point.x);
+        Object.freeze(point);
+        point.x=6;
+        console.log(point.x);
+        console.log();
+        console.log();
+        console.log();
+
+        //
+        //
+        //
+        //
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
