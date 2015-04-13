@@ -5,9 +5,62 @@
     <title>Function Prototype</title>
 
     <script>
-        
+        function first(x){
+            return x;
+        }
+
+        var second = function(x,y){
+            console.log(typeof arguments)
+            console.log( arguments.length)
+            console.log(arguments.callee)
+            console.log( arguments)
+            return x+y;
+        }
+
+        var object = {
+            x:10,
+            y:20,
+            z:30,
+            sum: function(){
+                return this.x+this.y+this.z;//error if only x,y,z...have to use this.x
+            }
+        }
+        var f = first(10)
+        console.log(f);
+        console.log(second(10,20));
+        console.log(object.sum());
 
 
+        var strict = (function(){console.log(this);return !!this;}());//undefined in strict Window right now
+
+        console.log(strict);
+
+
+        var calculator = { // An object literal
+            operand1: 1,
+            operand2: 1,
+            add: function() {
+// Note the use of the this keyword to refer to this object.
+                this.result = this.operand1 + this.operand2;
+            }
+        };
+        calculator.add(); // A method invocation to compute 1+1.
+        console.log(calculator.result);
+
+
+
+        var o = { // An object o.
+            m: function() { // Method m of the object.
+                var self = this; // Save the this value in a variable.
+                console.log(this === o); // Prints "true": this is the object o.
+                f(); // Now call the helper function f().
+                function f() { // A nested function f
+                    console.log(this === o); // "false": this is global or undefined
+                    console.log(self === o); // "true": self is the outer this value.
+                }
+            }
+        };
+        o.m();
     </script>
 </head>
 <body>
